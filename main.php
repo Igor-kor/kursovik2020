@@ -1,7 +1,12 @@
+<html>
+<head>
+    <title>kursovik 2020</title>
+</head>
+<body>
+
 <?php
 include 'tree.php';
-$text = "aaaaaaaaaaaaaaabbbbbbbccccccddddddeeeee";
-
+$text = "beep boop beer!";
 $array = str_split($text,1);
 $slovar[$array[0]] = 0;
 foreach ($array as $el){
@@ -14,5 +19,11 @@ foreach ( $slovar as $key => $el ){
     $tree->setListokQueue(new lestok($key,$el));
 }
 $tree->generateThree();
+$tree->printThree();
 $tree->generateTable();
 print_r($tree->table);
+
+?>
+
+</body></html>
+

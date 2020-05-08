@@ -16,10 +16,10 @@ class tree
     }
 
     // гененрируем дерево из готовых листков выстраивая их
+    // нельзя обьединять 2 ветви если нет букв
+    //находим букву и присоедиеняем к дереву последнему и так пока не останется 1 эл
     function generateThree(){
         while (count($this->lestoks) >1){
-            $this->printThree();
-            echo "<br>===========<br>";
             $lestokleft = $this->lestoks[count($this->lestoks)-1];
             $lestokright = $this->lestoks[count($this->lestoks)-2];
             unset($this->lestoks[count($this->lestoks)-1]);
@@ -80,6 +80,8 @@ class lestok
         echo $this->symbol;
         echo $this->listval;
         echo "<br>";
+        if(!is_null($this->nextlestokleft))$this->nextlestokleft->printLestok();
+        if(!is_null($this->nextlestokright))$this->nextlestokright->printLestok();
     }
 
     function getArray($value){
