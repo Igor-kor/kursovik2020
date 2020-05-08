@@ -4,9 +4,12 @@
 class tree
 {
     var $lestoks;
+    var $table;
+    var $tree;
 
     function __construct() {
         $this->lestoks = array();
+        $this->table = array();
     }
 
     function setLestok($symbol, $value){
@@ -25,7 +28,7 @@ class tree
     }
 
     function generateTable(){
-        
+        $this->table = array_merge($this->lestoks[0]->nextlestokleft->getArray("0"),$this->lestoks[0]->nextlestokright->getArray("1"));
     }
 
     // вставляем в очередь наш листок
@@ -76,6 +79,26 @@ class lestok
         echo $this->symbol;
         echo $this->listval;
         echo "<br>";
+    }
+
+    function getArray($value,$direct = 0){
+        if(!is_null($this->symbol)){
+            return array($this->symbol=>$value);
+        }
+        if($direct = 0){
+           if(!is_null($this->nextlestokleft->symbol)){
+               $temp = $this->nextlestokleft;
+               $this->nextlestokleft = $this->nextlestokright;
+               $this->nextlestokright = $temp;
+           }
+        }else{
+            if(!is_null($this->nextlestokright->symbol)){
+                $temp = $this->nextlestokleft;
+                $this->nextlestokleft = $this->nextlestokright;
+                $this->nextlestokright = $temp;
+            }
+        }
+        return array_merge ( $this->nextlestokleft->getArray($value."0"), $this->nextlestokright->getArray($value."1"));
     }
 
 }
