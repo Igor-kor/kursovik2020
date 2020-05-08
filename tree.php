@@ -16,18 +16,23 @@ class tree
     }
 
     // гененрируем дерево из готовых листков выстраивая их
+    // неправильное обьединение, нужно обьеденять все за проход(а не 2 последних) пока не останется 1 элемент
     function generateThree(){
         while (count($this->lestoks) >1){
-            $lestokleft = $this->lestoks[count($this->lestoks)-1];
-            $lestokright = $this->lestoks[count($this->lestoks)-2];
-            unset($this->lestoks[count($this->lestoks)-1]);
-            unset($this->lestoks[count($this->lestoks)-1]);
-            $this->setListokQueue(new lestok(null,$lestokleft->listval+$lestokright->listval,$lestokleft,$lestokright));
+            $temp = $this->lestoks;
+            for($i = count($temp)-1; $i >0; $i-=2){
+                $lestokleft = $temp[$i];
+                $lestokright = $temp[$i-1];
+                unset($this->lestoks[$i]);
+                unset($this->lestoks[$i]);
+                $this->setListokQueue(new lestok(null,$lestokleft->listval+$lestokright->listval,$lestokleft,$lestokright));
+            }
         }
     }
 
     function generateTable(){
-        $this->table = $this->lestoks[0]->getArray("");
+        $this->table = array_merge($this->lestoks[0]->nextlestokleft->getArray("0",0),$this->lestoks[0]->nextlestokright->getArray("1",1));
+
     }
 
     // вставляем в очередь наш листок
@@ -80,11 +85,25 @@ class lestok
         echo "<br>";
     }
 
-    function getArray($value){
+    function getArray($value,$direction = 0){
         if(!is_null($this->symbol)){
             return array($this->symbol=>$value);
         }
+//        if( $this->nextlestokright->notnull() && $direction == 0){
+//            $temp = $this->nextlestokright;
+//            $this->nextlestokright =  $this->nextlestokleft;
+//            $this->nextlestokleft = $temp;
+//        }
+//        if( $this->nextlestokleft->notnull() && $direction == 1){
+//            $temp = $this->nextlestokright;
+//            $this->nextlestokright =  $this->nextlestokleft;
+//            $this->nextlestokleft = $temp;
+//        }
         return array_merge ( $this->nextlestokleft->getArray($value."0"), $this->nextlestokright->getArray($value."1"));
+    }
+
+    function notnull(){
+        return !is_null($this->symbol);
     }
 
 }
