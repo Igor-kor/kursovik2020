@@ -18,6 +18,8 @@ class tree
     // гененрируем дерево из готовых листков выстраивая их
     function generateThree(){
         while (count($this->lestoks) >1){
+            $this->printThree();
+            echo "<br>===========<br>";
             $lestokleft = $this->lestoks[count($this->lestoks)-1];
             $lestokright = $this->lestoks[count($this->lestoks)-2];
             unset($this->lestoks[count($this->lestoks)-1]);
@@ -38,11 +40,11 @@ class tree
         }else{
             $setlest = false;
             for ($i = 0; $i < count($this->lestoks);$i++){
-                $tempLestoks[] = $this->lestoks[$i];
-                if($lestok->listval == $this->lestoks[$i]->listval && $setlest == false){
+                if($lestok->listval >= $this->lestoks[$i]->listval && $setlest == false){
                     $tempLestoks[] = $lestok;
                     $setlest = true;
                 }
+                $tempLestoks[] = $this->lestoks[$i];
             }
             if($setlest == false){
                 $tempLestoks[] = $lestok;
