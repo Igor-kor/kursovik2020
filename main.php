@@ -1,6 +1,6 @@
 <?php
 include 'tree.php';
-$text = "aaaaabbbbcccdde";
+$text = "beep boop beer!";
 
 $array = str_split($text,1);
 $slovar[$array[0]] = 0;
