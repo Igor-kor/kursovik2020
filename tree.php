@@ -17,9 +17,10 @@ class tree
         $this->lestoks[] = new lestok($symbol, $value);
     }
 
-    // гененрируем дерево из готовых листков выстраивая их
+    // гененрируем дерево из листков выстраивая их
     function generateThree($text)
     {
+        // подсчет
         $array = str_split($text, 1);
         $slovar[$array[0]] = 0;
         foreach ($array as $el) {
@@ -27,10 +28,12 @@ class tree
             $slovar[$el]++;
         }
 
+        // создаем сортированный список по весам
         foreach ($slovar as $key => $el) {
             $this->setListokQueue(new lestok($key, $el));
         }
 
+        // формируем дерево
         while (count($this->lestoks) > 1) {
             $lestokleft = $this->lestoks[count($this->lestoks) - 1];
             $lestokright = $this->lestoks[count($this->lestoks) - 2];
@@ -74,6 +77,7 @@ class tree
         }
     }
 
+    // кодируем текст по таблице
     function encode($text)
     {
         $array = str_split($text, 1);
@@ -84,6 +88,7 @@ class tree
         return $archive;
     }
 
+    // декодируем текст по дерево
     function decode($text)
     {
         $array = str_split($text, 1);
@@ -134,6 +139,7 @@ class lestok
         if (!is_null($this->nextlestokright)) $this->nextlestokright->printLestok();
     }
 
+    // получаем таблицу из всех вложенных элементов дерева(вызывать функцию их корневого элемента)
     function getArray($value)
     {
         if (!is_null($this->symbol)) {
