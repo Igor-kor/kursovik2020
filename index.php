@@ -5,10 +5,10 @@
 
 </head>
 <body>
-<p> Курсовой проект Коды Хаффмана
-    Автор: Игорь Шарангия
-    Github: <a href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a>
-</p>>
+<p> Курсовой проект Коды Хаффмана<br>
+    Автор: Игорь Шарангия<br>
+    Github: <a href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a><br>
+</p>
 <?php
 // todo Переделать на пост запросы, сервак не может обработать слишком длинные запросы
 error_reporting(0);
