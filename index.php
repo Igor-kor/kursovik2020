@@ -9,8 +9,7 @@
     Автор: Игорь Шарангия<br>
     Github: <a href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a><br>
 </p>
-<?php
-// todo Переделать на пост запросы, сервак не может обработать слишком длинные запросы
+<?php 
 error_reporting(0);
 include 'tree.php';
 $text = " Игорь Шарангия, курсовая работа 2020 ";
@@ -48,7 +47,7 @@ echo "<br> Количество бит после сжатия (без учет�
 
 <?php
 //декодируем текст
-echo "Декодированная строка - <div class='boxtext'>" . $tree->decode($_POST["textcode"]) . "</div><br>";
+echo "Декодированная строка - <div class='boxtext'>" . $tree->decode( empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]) . "</div><br>";
 echo "Сериализованное дерево для декодирования<br><div class='boxtext' >" . serialize($tree) . "</div>";
 ?>
 </body>
