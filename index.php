@@ -14,11 +14,11 @@
 error_reporting(0);
 include 'tree.php';
 $text = " Игорь Шарангия, курсовая работа 2020 ";
-if (!empty($_GET["encode"] || !empty($_GET["decode"]))) {
-    $text = $_GET["text"];
+if (!empty($_POST["encode"] || !empty($_POST["decode"]))) {
+    $text = $_POST["text"];
 }
-if (!empty($_GET["decode"])) {
-    $tree = unserialize(base64_decode($_GET["textsource"]));
+if (!empty($_POST["decode"])) {
+    $tree = unserialize(base64_decode($_POST["textsource"]));
 } else {
     $tree = new tree();
     // генерируем дерево
@@ -34,13 +34,13 @@ echo "<br> Количество бит после сжатия (без учет�
 
 ?>
 
-<form action="">
+<form action="" method="post">
     <input name="text" type="text" value="<?php echo $text ?>">
     <input class="smbbutton" name="encode" type="submit" value="Закодировать">
 </form>
 <?php echo "Закодированная строка - <div class='boxtext'>" . $encodeText . "</div><br>"; ?>
-<form action="">
-    <input name="textcode" type="text" value="<?php echo empty($_GET["textcode"]) ? $encodeText : $_GET["textcode"] ?>">
+<form action="" method="post">
+    <input name="textcode" type="text" value="<?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"] ?>">
     <input name="textsource" type="hidden" value="<?php echo base64_encode(serialize($tree)) ?>">
     <input name="text" type="hidden" value="<?php echo $text ?>">
     <input class="smbbutton" name="decode" type="submit" value="Раскодировать">
@@ -48,7 +48,7 @@ echo "<br> Количество бит после сжатия (без учет�
 
 <?php
 //декодируем текст
-echo "Декодированная строка - <div class='boxtext'>" . $tree->decode($_GET["textcode"]) . "</div><br>";
+echo "Декодированная строка - <div class='boxtext'>" . $tree->decode($_POST["textcode"]) . "</div><br>";
 echo "Сериализованное дерево для декодирования<br><div class='boxtext' >" . serialize($tree) . "</div>";
 ?>
 </body>
