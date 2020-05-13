@@ -27,7 +27,7 @@
 error_reporting(0);
 include 'tree.php';
 $text = " Игорь Шарангия, курсовая работа 2020 ";
-if (!empty($_GET["encode"])) {
+if (!empty($_GET["encode"] || !empty($_GET["decode"]))) {
     $text = $_GET["text"];
 }
 if (!empty($_GET["decode"])) {
@@ -57,6 +57,7 @@ echo "<br> Количество бит после сжатия (без учет�
     <input name="textcode" type="text" value="<?php echo empty($_GET["textcode"])?$encodeText:$_GET["textcode"] ?>">
     <!--    тут вместо исходной строки нужно сериализовать дерево и восстановить его при декодировании -->
     <input name="textsource" type="hidden" value="<?php echo base64_encode(serialize($tree)) ?>">
+    <input name="text" type="hidden" value="<?php echo $text ?>">
     <input class="smbbutton" name="decode" type="submit" value="Раскодировать">
 </form>
 
