@@ -1,12 +1,12 @@
 <html>
 <head>
-    <title> Игорь шарангия, курсовая работа 2020 </title>
+    <title> Игорь Шарангия, курсовая работа 2020 </title>
 </head>
 <body>
 
 <?php
 include 'tree.php';
-$text = " Игорь шарангия, курсовая работа 2020 ";
+$text = " Игорь Шарангия, курсовая работа 2020 ";
 $tree = new tree();
 // генерируем дерево
 $tree->generateThree($text);

@@ -46,7 +46,7 @@ class tree
     function generateTable()
     {
         // необходим ассоциативный массив , функция возвращает индесы неправильно
-        $this->table = array_merge(array("null"=>"null"),$this->lestoks[0]->getArray(""));
+        $this->table =  $this->lestoks[0]->getArray("");
     }
 
     // вставляем в очередь наш листок
@@ -83,7 +83,6 @@ class tree
     {
         $array = str_split($text, 1);
         $archive = "";
-        print_r($this->table);
         foreach ($array as $el) {
             // небольшой костыль для принудительного формирования ассоциативного массива
             $archive .= $this->table[$el."o"];
@@ -142,7 +141,7 @@ class lestok
         if (!is_null($this->nextlestokright)) $this->nextlestokright->printLestok();
     }
 
-    // получаем таблицу из всех вложенных элементов дерева(вызывать функцию их корневого элемента)
+    // получаем таблицу из всех вложенных элементов дерева(вызывать функцию из корневого элемента)
     function getArray($value)
     {
         if (!is_null($this->symbol)) {
