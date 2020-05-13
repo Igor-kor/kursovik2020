@@ -1,6 +1,5 @@
 <?php
 
-
 class tree
 {
     var $lestoks;
@@ -130,7 +129,6 @@ class lestok
         $this->nextlestokleft = $nextlestokleft;
         $this->nextlestokright = $nextlestokright;
     }
-
 
     function printLestok()
     {
