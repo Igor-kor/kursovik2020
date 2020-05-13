@@ -6,57 +6,105 @@ class tree
     var $lestoks;
     var $table;
 
-    function __construct() {
+    function __construct()
+    {
         $this->lestoks = array();
         $this->table = array();
     }
 
-    function setLestok($symbol, $value){
-       $this->lestoks[] = new lestok($symbol,$value);
+    function setLestok($symbol, $value)
+    {
+        $this->lestoks[] = new lestok($symbol, $value);
     }
 
     // гененрируем дерево из готовых листков выстраивая их
-    // нельзя обьединять 2 ветви если нет букв
-    //находим букву и присоедиеняем к дереву последнему и так пока не останется 1 эл
-    function generateThree(){
-        while (count($this->lestoks) >1){
-            $lestokleft = $this->lestoks[count($this->lestoks)-1];
-            $lestokright = $this->lestoks[count($this->lestoks)-2];
-            unset($this->lestoks[count($this->lestoks)-1]);
-            unset($this->lestoks[count($this->lestoks)-1]);
-            $this->setListokQueue(new lestok(null,$lestokleft->listval+$lestokright->listval,$lestokleft,$lestokright));
+    function generateThree($text)
+    {
+        $array = str_split($text, 1);
+        $slovar[$array[0]] = 0;
+        foreach ($array as $el) {
+            if (empty($slovar[$el])) $slovar[$el] = 0;
+            $slovar[$el]++;
+        }
+
+        foreach ($slovar as $key => $el) {
+            $this->setListokQueue(new lestok($key, $el));
+        }
+
+        while (count($this->lestoks) > 1) {
+            $lestokleft = $this->lestoks[count($this->lestoks) - 1];
+            $lestokright = $this->lestoks[count($this->lestoks) - 2];
+            unset($this->lestoks[count($this->lestoks) - 1]);
+            unset($this->lestoks[count($this->lestoks) - 1]);
+            $this->setListokQueue(new lestok(null, $lestokleft->listval + $lestokright->listval, $lestokleft, $lestokright));
         }
     }
 
-    function generateTable(){
+    function generateTable()
+    {
         $this->table = $this->lestoks[0]->getArray("");
     }
 
     // вставляем в очередь наш листок
-    function setListokQueue($lestok){
-        $tempLestoks= array();
-        if(empty($this->lestoks)){
+    function setListokQueue($lestok)
+    {
+        $tempLestoks = array();
+        if (empty($this->lestoks)) {
             $tempLestoks[] = $lestok;
-        }else{
+        } else {
             $setlest = false;
-            for ($i = 0; $i < count($this->lestoks);$i++){
-                if($lestok->listval >= $this->lestoks[$i]->listval && $setlest == false){
+            for ($i = 0; $i < count($this->lestoks); $i++) {
+                if ($lestok->listval >= $this->lestoks[$i]->listval && $setlest == false) {
                     $tempLestoks[] = $lestok;
                     $setlest = true;
                 }
                 $tempLestoks[] = $this->lestoks[$i];
             }
-            if($setlest == false){
+            if ($setlest == false) {
                 $tempLestoks[] = $lestok;
             }
         }
         $this->lestoks = $tempLestoks;
     }
 
-    function printThree(){
-        foreach ($this->lestoks as $el){
+    function printThree()
+    {
+        foreach ($this->lestoks as $el) {
             $el->printLestok();
         }
+    }
+
+    function encode($text)
+    {
+        $array = str_split($text, 1);
+        $archive = "";
+        foreach ($array as $el) {
+            $archive .= $this->table[$el];
+        }
+        return $archive;
+    }
+
+    function decode($text)
+    {
+        $array = str_split($text, 1);
+        $decodeText = "";
+        $ptr = $this->lestoks[0];
+        foreach ($array as $el) {
+            if ($el == "0") {
+                $ptr = $ptr->nextlestokleft;
+                if (!is_null($ptr->symbol)) {
+                    $decodeText .= $ptr->symbol;
+                    $ptr = $this->lestoks[0];
+                }
+            } else {
+                $ptr = $ptr->nextlestokright;
+                if (!is_null($ptr->symbol)) {
+                    $decodeText .= $ptr->symbol;
+                    $ptr = $this->lestoks[0];
+                }
+            }
+        }
+        return $decodeText;
     }
 
 }
@@ -68,7 +116,8 @@ class lestok
     var $nextlestokleft;
     var $nextlestokright;
 
-    function __construct($symbol, $value, $nextlestokleft = null, $nextlestokright = null){
+    function __construct($symbol, $value, $nextlestokleft = null, $nextlestokright = null)
+    {
         $this->symbol = $symbol;
         $this->listval = $value;
         $this->nextlestokleft = $nextlestokleft;
@@ -76,19 +125,21 @@ class lestok
     }
 
 
-    function printLestok(){
+    function printLestok()
+    {
         echo $this->symbol;
         echo $this->listval;
         echo "<br>";
-        if(!is_null($this->nextlestokleft))$this->nextlestokleft->printLestok();
-        if(!is_null($this->nextlestokright))$this->nextlestokright->printLestok();
+        if (!is_null($this->nextlestokleft)) $this->nextlestokleft->printLestok();
+        if (!is_null($this->nextlestokright)) $this->nextlestokright->printLestok();
     }
 
-    function getArray($value){
-        if(!is_null($this->symbol)){
-            return array($this->symbol=>$value);
+    function getArray($value)
+    {
+        if (!is_null($this->symbol)) {
+            return array($this->symbol => $value);
         }
-        return array_merge ( $this->nextlestokleft->getArray($value."0"), $this->nextlestokright->getArray($value."1"));
+        return array_merge($this->nextlestokleft->getArray($value . "0"), $this->nextlestokright->getArray($value . "1"));
     }
 
 }

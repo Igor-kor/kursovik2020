@@ -6,24 +6,18 @@
 
 <?php
 include 'tree.php';
-$text = "beep boop beer!";
-$array = str_split($text,1);
-$slovar[$array[0]] = 0;
-foreach ($array as $el){
-    if(empty($slovar[$el]))$slovar[$el] = 0;
-     $slovar[$el]++;
-}
-//в порядке возрастания
+$text = "just text";
 $tree = new tree();
-foreach ( $slovar as $key => $el ){
-    $tree->setListokQueue(new lestok($key,$el));
-}
-$tree->generateThree();
+$tree->generateThree($text);
 $tree->printThree();
 $tree->generateTable();
-print_r($tree->table);
+$encodeText = $tree->encode($text);
+echo "<br> Количество бит до сжатия(для 1 байтной кодировки): " . strlen($encodeText) * 8;
+echo "<br> Количество бит после сжатия: " . strlen($encodeText) . "<br>" ;
+echo "Закодированная строка - ". $encodeText . "<br>";
+echo "Декодированная строка - " . $tree->decode($encodeText) . "<br>";
 
 ?>
-
-</body></html>
+</body>
+</html>
 
