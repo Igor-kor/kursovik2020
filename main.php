@@ -6,7 +6,7 @@
 
 <?php
 include 'tree.php';
-$text = "just text";
+$text = " Игорь шарангия, курсовая работа 2020 ";
 $tree = new tree();
 // генерируем дерево
 $tree->generateThree($text);
