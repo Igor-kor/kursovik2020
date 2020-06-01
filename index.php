@@ -64,7 +64,6 @@
             <form id="decode" action="" method="post">
                 <textarea aria-label="" class="inputtext"
                           name="textcode"><?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]; ?></textarea>
-<!--                <input name="textsource" type="hidden" value="--><?php //echo base64_encode(serialize($tree)) ?><!--">-->
                 <input name="text" type="hidden" value="<?php echo $text; ?>">
             </form>
         </div>
