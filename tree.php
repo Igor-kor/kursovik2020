@@ -55,26 +55,19 @@ class tree
         if (empty($this->nodes)) {
             $tempnodes[] = $node;
         } else {
-            $setlest = false;
+            $setnode = false;
             for ($i = 0; $i < count($this->nodes); $i++) {
-                if ($node->nodeval >= $this->nodes[$i]->nodeval && $setlest == false) {
+                if ($node->nodeval >= $this->nodes[$i]->nodeval && $setnode == false) {
                     $tempnodes[] = $node;
-                    $setlest = true;
+                    $setnode = true;
                 }
                 $tempnodes[] = $this->nodes[$i];
             }
-            if ($setlest == false) {
+            if ($setnode == false) {
                 $tempnodes[] = $node;
             }
         }
         $this->nodes = $tempnodes;
-    }
-
-    function printTree()
-    {
-        foreach ($this->nodes as $el) {
-            $el->printnode();
-        }
     }
 
     // кодируем текст по таблице

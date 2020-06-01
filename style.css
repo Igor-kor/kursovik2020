@@ -1,18 +1,119 @@
 .boxtext {
-    border: 1px solid #333;
-    box-shadow: 8px 8px 5px #444;
     padding: 8px 12px;
-    width: 98%;
-    white-space: nowrap;
-    overflow: auto;
-    background-color: burlywood;
+    width: 500px;
+    height: 200px;
+    word-wrap: break-word;
+    overflow-y: auto;
+}
+
+.treetex {
+    padding: 30px 30px;
+    width: auto;
+    height: 300px;
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 input {
     padding-top: 10px;
-    width: 100%;
+    width: 500px;
 }
 
-.smbbutton {
-    background-color: #32de4c;
+.inputtext {
+    margin: 20px 20px;
+    width: 500px;
+    height: 200px;
+    word-wrap: break-word;
+    overflow-y: auto;
 }
+
+.boxshadow {
+    margin-bottom: 15px;
+    border-radius: 38px;
+    background: #c0e3fe;
+    box-shadow: 22px 22px 43px #90aabf,
+    -22px -22px 43px #f0ffff;
+
+}
+
+.boxshadowbutton {
+    border-width: 0;
+    border-radius: 10px;
+    background: #c0e3fe;
+    box-shadow: 4px 4px 8px #a3c1d8,
+    -4px -4px 8px #ddffff;
+}
+
+body {
+    background: #c0e3fe;
+    font-family: medium-content-title-font, Georgia, Cambria, "Times New Roman", Times, serif;
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.4fr 0.7fr 2.8fr 0.8fr 0.4fr;
+    grid-template-rows: 0.1fr 0.3fr 0.5fr 2fr 2fr 2.3fr;
+    gap: 1px 1px;
+    grid-template-areas: ". . . . ." ". . gridtitle . ." ". gridinfo gridinfo gridinfo ." ". gridencode gridencode gridencode ." ". griddecode griddecode griddecode ." ". gridother gridother gridother .";
+}
+
+
+.gridinfo {
+    grid-area: gridinfo;
+}
+
+.gridtitle {
+    grid-area: gridtitle;
+    text-align: center;
+}
+
+.gridencode {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.5fr 0.35fr;
+    gap: 1px 1px;
+    grid-template-areas: "encodebefore encodeafter" "encoderbutton encoderbutton";
+    grid-area: gridencode;
+}
+
+.encodebefore {
+    grid-area: encodebefore;
+}
+
+.encodeafter {
+    grid-area: encodeafter;
+}
+
+.encoderbutton {
+    text-align: center;
+    grid-area: encoderbutton;
+}
+
+.griddecode {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.5fr 0.5fr;
+    gap: 1px 1px;
+    grid-template-areas: "decodebefore decodeafter" "decodebutton decodebutton";
+    grid-area: griddecode;
+}
+
+.decodebefore {
+    grid-area: decodebefore;
+}
+
+.decodeafter {
+    grid-area: decodeafter;
+}
+
+.decodebutton {
+    text-align: center;
+    grid-area: decodebutton;
+}
+
+.gridother {
+    text-align: center;
+    grid-area: gridother;
+}
+

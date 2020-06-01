@@ -14,15 +14,6 @@ class node
         $this->nextnoderight = $nextnoderight;
     }
 
-    function printnode()
-    {
-        echo $this->symbol;
-        echo $this->nodeval;
-        echo "<br>";
-        if (!is_null($this->nextnodeleft)) $this->nextnodeleft->printnode();
-        if (!is_null($this->nextnoderight)) $this->nextnoderight->printnode();
-    }
-
     // получаем таблицу из всех вложенных элементов дерева(вызывать функцию из корневого элемента)
     function getArray($value)
     {
