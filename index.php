@@ -9,11 +9,12 @@
     Автор: Игорь Шарангия<br>
     Github: <a href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a><br>
 </p>
-<?php 
-error_reporting(0);
+<?php
+//error_reporting(0);
+include 'node.php';
 include 'tree.php';
 $text = " Игорь Шарангия, курсовая работа 2020 ";
-if (!empty($_POST["encode"] || !empty($_POST["decode"]))) {
+if (!empty($_POST["encode"]) || !empty($_POST["decode"])) {
     $text = $_POST["text"];
 }
 if (!empty($_POST["decode"])) {
@@ -21,7 +22,7 @@ if (!empty($_POST["decode"])) {
 } else {
     $tree = new tree();
     // генерируем дерево
-    $tree->generateThree($text);
+    $tree->generateTree($text);
     //генерируем таблицу
     $tree->generateTable();
 }

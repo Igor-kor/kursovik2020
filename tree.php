@@ -2,22 +2,22 @@
 
 class tree
 {
-    var $lestoks;
+    var $nodes;
     var $table;
 
     function __construct()
     {
-        $this->lestoks = array();
+        $this->nodes = array();
         $this->table = array();
     }
 
-    function setLestok($symbol, $value)
+    function setnode($symbol, $value)
     {
-        $this->lestoks[] = new lestok($symbol, $value);
+        $this->nodes[] = new node($symbol, $value);
     }
 
     // гененрируем дерево из листков выстраивая их
-    function generateThree($text)
+    function generateTree($text)
     {
         // подсчет
         $array = str_split($text, 1);
@@ -29,51 +29,51 @@ class tree
 
         // создаем сортированный список по весам
         foreach ($slovar as $key => $el) {
-            $this->setListokQueue(new lestok($key, $el));
+            $this->setListokQueue(new node($key, $el));
         }
 
         // формируем дерево
-        while (count($this->lestoks) > 1) {
-            $lestokleft = $this->lestoks[count($this->lestoks) - 1];
-            $lestokright = $this->lestoks[count($this->lestoks) - 2];
-            unset($this->lestoks[count($this->lestoks) - 1]);
-            unset($this->lestoks[count($this->lestoks) - 1]);
-            $this->setListokQueue(new lestok(null, $lestokleft->listval + $lestokright->listval, $lestokleft, $lestokright));
+        while (count($this->nodes) > 1) {
+            $nodeeft = $this->nodes[count($this->nodes) - 1];
+            $noderight = $this->nodes[count($this->nodes) - 2];
+            unset($this->nodes[count($this->nodes) - 1]);
+            unset($this->nodes[count($this->nodes) - 1]);
+            $this->setListokQueue(new node(null, $nodeeft->nodeval + $noderight->nodeval, $nodeeft, $noderight));
         }
     }
 
     function generateTable()
     {
         // необходим ассоциативный массив , функция возвращает индесы неправильно
-        $this->table =  $this->lestoks[0]->getArray("");
+        $this->table =  $this->nodes[0]->getArray("");
     }
 
     // вставляем в очередь наш листок
-    function setListokQueue($lestok)
+    function setListokQueue($node)
     {
-        $tempLestoks = array();
-        if (empty($this->lestoks)) {
-            $tempLestoks[] = $lestok;
+        $tempnodes = array();
+        if (empty($this->nodes)) {
+            $tempnodes[] = $node;
         } else {
             $setlest = false;
-            for ($i = 0; $i < count($this->lestoks); $i++) {
-                if ($lestok->listval >= $this->lestoks[$i]->listval && $setlest == false) {
-                    $tempLestoks[] = $lestok;
+            for ($i = 0; $i < count($this->nodes); $i++) {
+                if ($node->nodeval >= $this->nodes[$i]->nodeval && $setlest == false) {
+                    $tempnodes[] = $node;
                     $setlest = true;
                 }
-                $tempLestoks[] = $this->lestoks[$i];
+                $tempnodes[] = $this->nodes[$i];
             }
             if ($setlest == false) {
-                $tempLestoks[] = $lestok;
+                $tempnodes[] = $node;
             }
         }
-        $this->lestoks = $tempLestoks;
+        $this->nodes = $tempnodes;
     }
 
-    function printThree()
+    function printTree()
     {
-        foreach ($this->lestoks as $el) {
-            $el->printLestok();
+        foreach ($this->nodes as $el) {
+            $el->printnode();
         }
     }
 
@@ -94,59 +94,23 @@ class tree
     {
         $array = str_split($text, 1);
         $decodeText = "";
-        $ptr = $this->lestoks[0];
+        $ptr = $this->nodes[0];
         foreach ($array as $el) {
             if ($el == "0") {
-                $ptr = $ptr->nextlestokleft;
+                $ptr = $ptr->nextnodeleft;
                 if (!is_null($ptr->symbol)) {
                     $decodeText .= $ptr->symbol;
-                    $ptr = $this->lestoks[0];
+                    $ptr = $this->nodes[0];
                 }
             } else {
-                $ptr = $ptr->nextlestokright;
+                $ptr = $ptr->nextnoderight;
                 if (!is_null($ptr->symbol)) {
                     $decodeText .= $ptr->symbol;
-                    $ptr = $this->lestoks[0];
+                    $ptr = $this->nodes[0];
                 }
             }
         }
         return $decodeText;
-    }
-
-}
-
-class lestok
-{
-    var $symbol;
-    var $listval;
-    var $nextlestokleft;
-    var $nextlestokright;
-
-    function __construct($symbol, $value, $nextlestokleft = null, $nextlestokright = null)
-    {
-        $this->symbol = $symbol;
-        $this->listval = $value;
-        $this->nextlestokleft = $nextlestokleft;
-        $this->nextlestokright = $nextlestokright;
-    }
-
-    function printLestok()
-    {
-        echo $this->symbol;
-        echo $this->listval;
-        echo "<br>";
-        if (!is_null($this->nextlestokleft)) $this->nextlestokleft->printLestok();
-        if (!is_null($this->nextlestokright)) $this->nextlestokright->printLestok();
-    }
-
-    // получаем таблицу из всех вложенных элементов дерева(вызывать функцию из корневого элемента)
-    function getArray($value)
-    {
-        if (!is_null($this->symbol)) {
-            // небольшой костыль для принудительного формирования ассоциативного массива, иначе плохо работает с числами
-            return array($this->symbol."o" => $value);
-        }
-        return array_merge($this->nextlestokleft->getArray($value . "0"), $this->nextlestokright->getArray($value . "1"));
     }
 
 }
