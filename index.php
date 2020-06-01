@@ -41,28 +41,28 @@
     <div class="gridencode boxshadow">
         <div class="encodebefore">
             <form id="encode" action="" method="post">
-                <textarea aria-label="" class="inputtext" name="text"  ><?php echo $text ?></textarea>
+                <textarea aria-label="" class="inputtext" name="text"  ><?php echo $text; ?></textarea>
             </form>
         </div>
         <div class="encodeafter">
-            <?php echo "Закодированная строка - <div class='boxtext'>" . $encodeText . "</div><br>"; ?>
+            Закодированная строка - <div class="boxtext"><?php echo  $encodeText;?></div>
         </div>
         <div class="encoderbutton">
             <input class="smbbutton boxshadowbutton" name="encode" type="submit"
-                   value="Закодировать" form="encode"></div>
+                   value="Закодировать" form="encode">
+        </div>
     </div>
 
     <div class="griddecode boxshadow">
         <div class="decodebefore">
             <form id="decode" action="" method="post">
-                <textarea  aria-label="" class="inputtext" name="textcode" ><?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"] ?></textarea>
-
+                <textarea  aria-label="" class="inputtext" name="textcode" ><?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]; ?></textarea>
                 <input name="textsource" type="hidden" value="<?php echo base64_encode(serialize($tree)) ?>">
-                <input name="text" type="hidden" value="<?php echo $text ?>">
+                <input name="text" type="hidden" value="<?php echo $text; ?>">
             </form>
         </div>
         <div class="decodeafter">
-            <?php echo "Декодированная строка - <div class='boxtext'>" . $tree->decode(empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]) . "</div><br>"; ?>
+            <?php echo "Декодированная строка - <div class='boxtext'>" . $tree->decode(empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]) . "</div>"; ?>
         </div>
         <div class="decodebutton">
             <input class="smbbutton boxshadowbutton" name="decode" type="submit" value="Раскодировать" form="decode">

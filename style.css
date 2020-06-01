@@ -1,8 +1,9 @@
 .boxtext {
     padding: 8px 12px;
-    width: 500px;
+    width: 95%;
     height: 200px;
     word-wrap: break-word;
+    word-break: break-all;
     overflow-y: auto;
 }
 
@@ -21,7 +22,7 @@ input {
 
 .inputtext {
     margin: 20px 20px;
-    width: 500px;
+    width: 95%;
     height: 200px;
     word-wrap: break-word;
     overflow-y: auto;
@@ -52,7 +53,7 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 0.4fr 0.7fr 2.8fr 0.8fr 0.4fr;
+    grid-template-columns: 0.4fr 0.8fr 2.8fr 0.8fr 0.4fr;
     grid-template-rows: 0.1fr 0.3fr 0.5fr 2fr 2fr 2.3fr;
     gap: 1px 1px;
     grid-template-areas: ". . . . ." ". . gridtitle . ." ". gridinfo gridinfo gridinfo ." ". gridencode gridencode gridencode ." ". griddecode griddecode griddecode ." ". gridother gridother gridother .";
@@ -93,7 +94,7 @@ body {
 .griddecode {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1.5fr 0.5fr;
+    grid-template-rows: 1.5fr 0.35fr;
     gap: 1px 1px;
     grid-template-areas: "decodebefore decodeafter" "decodebutton decodebutton";
     grid-area: griddecode;
