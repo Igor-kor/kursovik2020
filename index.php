@@ -12,27 +12,36 @@
         Github: <a
                 href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a><br>
         </p></div>
-
+    <div class="gridother2 boxshadow">
+        <div class='treetex'>
+            <p>Таблица для кодирования</p>
+            <?php
+            //error_reporting(0);
+            include 'node.php';
+            include 'tree.php';
+            $text = " Игорь Шарангия, курсовая работа 2020 ";
+            if (!empty($_POST["encode"]) || !empty($_POST["decode"])) {
+                $text = $_POST["text"];
+            }
+            if(strlen($text) <= 1){
+                $text = "Текст должен содержать хотя бы 2 символа";
+            }
+            if (!empty($_POST["decode"])) {
+                $tree = unserialize(base64_decode($_POST["textsource"]));
+            } else {
+                $tree = new tree();
+                // генерируем дерево
+                $tree->generateTree($text);
+                //генерируем таблицу
+                $tree->generateTable();
+            }
+            // кодируем текст
+            $encodeText = $tree->encode($text);
+            ?>
+        </div>
+    </div>
     <div class="gridinfo">
         <?php
-        //error_reporting(0);
-        include 'node.php';
-        include 'tree.php';
-        $text = " Игорь Шарангия, курсовая работа 2020 ";
-        if (!empty($_POST["encode"]) || !empty($_POST["decode"])) {
-            $text = $_POST["text"];
-        }
-        if (!empty($_POST["decode"])) {
-            $tree = unserialize(base64_decode($_POST["textsource"]));
-        } else {
-            $tree = new tree();
-            // генерируем дерево
-            $tree->generateTree($text);
-            //генерируем таблицу
-            $tree->generateTable();
-        }
-        // кодируем текст
-        $encodeText = $tree->encode($text);
         echo "<br> Количество бит до сжатия(для 1 байтной кодировки): " . strlen($text) * 8;
         echo "<br> Количество бит после сжатия (без учета дерева для декодирования): " . strlen($encodeText) . "<br>";
 
@@ -41,11 +50,12 @@
     <div class="gridencode boxshadow">
         <div class="encodebefore">
             <form id="encode" action="" method="post">
-                <textarea aria-label="" class="inputtext" name="text"  ><?php echo $text; ?></textarea>
+                <textarea aria-label="" class="inputtext" name="text"><?php echo $text; ?></textarea>
             </form>
         </div>
         <div class="encodeafter">
-            Закодированная строка - <div class="boxtext"><?php echo  $encodeText;?></div>
+            Закодированная строка -
+            <div class="boxtext"><?php echo $encodeText; ?></div>
         </div>
         <div class="encoderbutton">
             <input class="smbbutton boxshadowbutton" name="encode" type="submit"
@@ -56,7 +66,8 @@
     <div class="griddecode boxshadow">
         <div class="decodebefore">
             <form id="decode" action="" method="post">
-                <textarea  aria-label="" class="inputtext" name="textcode" ><?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]; ?></textarea>
+                <textarea aria-label="" class="inputtext"
+                          name="textcode"><?php echo empty($_POST["textcode"]) ? $encodeText : $_POST["textcode"]; ?></textarea>
                 <input name="textsource" type="hidden" value="<?php echo base64_encode(serialize($tree)) ?>">
                 <input name="text" type="hidden" value="<?php echo $text; ?>">
             </form>
@@ -71,7 +82,6 @@
     <div class="gridother boxshadow">
         <?php
         //декодируем текст
-
         echo "Сериализованное дерево для декодирования<br><div class='treetex' >" . base64_encode(serialize($tree)) . "</div>";
         ?>
     </div>
