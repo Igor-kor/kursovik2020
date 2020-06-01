@@ -14,7 +14,7 @@
         </p></div>
 
     <?php
-    //error_reporting(0);
+    error_reporting(0);
     include 'node.php';
     include 'tree.php';
     $text = "Игорь Шарангия, курсовая работа 2020 ";
