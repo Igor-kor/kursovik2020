@@ -75,6 +75,7 @@
         </div>
     </div>
     <div class="gridother boxshadow">
+        Данные для декодирования
         <textarea class='treetex' name="textsource" form="decode"><?php echo base64_encode(serialize($tree)) ?></textarea>
     </div>
     <div class="gridother2 boxshadow">
