@@ -82,7 +82,7 @@
     <div class="gridother boxshadow">
         <?php
         //декодируем текст
-        echo "Сериализованное дерево для декодирования<br><div class='treetex' >" . base64_encode(serialize($tree)) . "</div>";
+        echo "Данные для декодирования<br><div class='treetex' >" . base64_encode(serialize($tree)) . "</div>";
         ?>
     </div>
 </div>
