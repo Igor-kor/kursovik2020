@@ -8,11 +8,12 @@
 }
 
 .treetex {
-    padding: 30px 30px;
-    width: auto;
+    margin: 30px 30px;
+    width: 90%;
     height: 300px;
     word-wrap: break-word;
     overflow-y: auto;
+    background: #c0e3fe;
 }
 
 input {

@@ -32,6 +32,11 @@ class tree
             $this->setListokQueue(new node($key, $el));
         }
 
+        // необходимо если символ всего 1
+        if(count($slovar) == 1){
+            $this->setListokQueue(new node('', 1));
+        }
+
         // формируем дерево
         while (count($this->nodes) > 1) {
             $nodeeft = $this->nodes[count($this->nodes) - 1];
