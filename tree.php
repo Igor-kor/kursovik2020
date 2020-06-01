@@ -20,7 +20,7 @@ class tree
     function generateTree($text)
     {
         // подсчет
-        $array = str_split($text, 1);
+        $array = mb_str_split($text, 1, 'UTF-8');;
         $slovar[$array[0]] = 0;
         foreach ($array as $el) {
             if (empty($slovar[$el])) $slovar[$el] = 0;
@@ -73,7 +73,7 @@ class tree
     // кодируем текст по таблице
     function encode($text)
     {
-        $array = str_split($text, 1);
+        $array =  mb_str_split($text, 1, 'UTF-8');;
         $archive = "";
         foreach ($array as $el) {
             // небольшой костыль для принудительного формирования ассоциативного массива

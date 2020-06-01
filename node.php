@@ -19,7 +19,7 @@ class node
     {
         if (!is_null($this->symbol)) {
             // вывод таблицы для кодирования
-            echo "символ[ ". iconv("ASCII","UTF-8", $this->symbol)."][".ord($this->symbol)."] код - ".$value ."<br>";
+            echo "символ[". $this->symbol."] код - ".$value ."<br>";
             // небольшой костыль для принудительного формирования ассоциативного массива, иначе плохо работает с числами
             return array($this->symbol."o" => $value);
         }

@@ -19,7 +19,7 @@
             //error_reporting(0);
             include 'node.php';
             include 'tree.php';
-            $text = " Игорь Шарангия, курсовая работа 2020 ";
+            $text = "Игорь Шарангия, курсовая работа 2020 ";
             if (!empty($_POST["encode"]) || !empty($_POST["decode"])) {
                 $text = $_POST["text"];
             }
