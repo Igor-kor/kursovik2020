@@ -142,7 +142,7 @@
             $nodevaluemax = $tree->allnodes[0]->nodeval + 1;
             foreach ($tree->allnodes as $key => $node) {
                 $label = "";
-                $color = "#ccc";
+                $color = "#444";
                 if (!is_null($node->symbol)) {
                     $label .= addslashes($node->symbol);
                     if (ord($node->symbol) < 14) {
@@ -173,7 +173,7 @@
                 source: 'n' + $node->idjs,
                 target: 'n' + $idleft,
                 size: 10,
-                color: '#ccc'
+                color: '#444'
                 });";
                     $count++;
                 }
@@ -186,7 +186,7 @@
                 source: 'n' + $node->idjs,
                 target: 'n' + $idright,
                 size: 10,
-                color: '#ccc',
+                color: '#444',
                 });";
                     $count++;
                 }
