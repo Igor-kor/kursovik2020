@@ -7,7 +7,7 @@
 <body>
 <div class="grid-container">
     <div class="gridtitle"><p>
-        <h1> Курсовой проект Коды Хаффмана</h1>
+        <h1> Курсовая работа: Коды Хаффмана</h1>
         <h2> Автор: Игорь Шарангия</h2>
         Github: <a
                 href="https://github.com/Igor-kor/kursovik2020.git">https://github.com/Igor-kor/kursovik2020.git</a><br>
