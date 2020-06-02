@@ -158,7 +158,7 @@
                 $label = "";
                 $color = "#ccc";
                 if (!is_null($node->symbol)) {
-                    $label .=  $node->symbol;
+                    $label .=  addslashes($node->symbol);
                     if(ord($node->symbol) < 14){
                         $label = "spec[".ord($node->symbol)."]";
                     }
@@ -166,10 +166,11 @@
                 }
                 $tree->allnodes[$key]->idjs = $count;
                 $y = $nodevaluemax - $node->nodeval;
+                $x =$count * ($nodevaluemax / count( $tree->allnodes));
                 echo "g.nodes.push({
                 id: 'n' + $count,
                 label: '' + '$label',
-                x: $count,
+                x: $x,
                 y: $y,
                 size: 10,
                 color: '$color'
@@ -218,13 +219,7 @@
                     minArrowSize: 10
                 }
             });
-            // load the graph
-            s.graph.read(graph);
-            // draw the graph
-            s.refresh();
-            // launch force-atlas for 5sec
-            s.startForceAtlas2();
-            window.setTimeout(function() {s.killForceAtlas2()}, 10000);
+
         </script>
     </div>
 
