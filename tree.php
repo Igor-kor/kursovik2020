@@ -13,11 +13,6 @@ class tree
         $this->allnodes = array();
     }
 
-    function setnode($symbol, $value)
-    {
-        $this->nodes[] = new node($symbol, $value);
-    }
-
     // гененрируем дерево из листков выстраивая их
     function generateTree($text)
     {
@@ -35,7 +30,7 @@ class tree
         }
 
         // необходимо если символ всего 1
-        if(count($slovar) == 1){
+        if (count($slovar) == 1) {
             $this->setListokQueue(new node('', 1));
         }
 
@@ -52,7 +47,7 @@ class tree
     function generateTable()
     {
         // необходим ассоциативный массив , функция возвращает индесы неправильно
-        $this->table =  $this->nodes[0]->getArray("",$this->allnodes);
+        $this->table = $this->nodes[0]->getArray("", $this->allnodes);
     }
 
     // вставляем в очередь наш листок
@@ -80,11 +75,11 @@ class tree
     // кодируем текст по таблице
     function encode($text)
     {
-        $array =  mb_str_split($text, 1, 'UTF-8');;
+        $array = mb_str_split($text, 1, 'UTF-8');;
         $archive = "";
         foreach ($array as $el) {
             // небольшой костыль для принудительного формирования ассоциативного массива
-            $archive .= $this->table[$el."o"];
+            $archive .= $this->table[$el . "o"];
         }
         return $archive;
     }
