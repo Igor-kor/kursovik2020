@@ -14,7 +14,7 @@
         </p></div>
 
     <?php
-    error_reporting(0);
+    //error_reporting(0);
     include 'node.php';
     include 'tree.php';
     $text = "Игорь Шарангия, курсовая работа 2020 ";
@@ -76,7 +76,8 @@
     </div>
     <div class="gridother boxshadow">
         Данные для декодирования
-        <textarea class='treetex' name="textsource" form="decode"><?php echo base64_encode(serialize($tree)) ?></textarea>
+        <textarea class='treetex' name="textsource"
+                  form="decode"><?php echo base64_encode(serialize($tree)) ?></textarea>
     </div>
     <div class="gridother2 boxshadow">
         <div class='treetex'>
@@ -88,6 +89,145 @@
             ?>
         </div>
     </div>
+    <div class="gridother3 boxshadow2">
+        <p>ДЕРЕВО</p>
+        <div id="graph-container"></div>
+        <!-- START SIGMA IMPORTS -->
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.core.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/conrad.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.utils.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/utils/sigma.polyfills.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/sigma.settings.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.dispatcher.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.configurable.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.graph.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.camera.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.quad.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/classes/sigma.classes.edgequad.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.mouse.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/captors/sigma.captors.touch.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.canvas.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.webgl.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.svg.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/sigma.renderers.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.rescale.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/middlewares/sigma.middlewares.copy.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.animation.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindEvents.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.bindDOMEvents.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/misc/sigma.misc.drawHovers.js"></script>
+        <!-- Sigma plugins -->
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.layout.forceAtlas2/supervisor.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.layout.forceAtlas2/worker.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/settings.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.def.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curve.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curvedArrow.js"></script>
+        <script>
+            /**
+             * This is a basic example on how to instantiate sigma. A random graph is
+             * generated and stored in the "graph" variable, and then sigma is instantiated
+             * directly with the graph.
+             *
+             * The simple instance of sigma is enough to make it render the graph on the on
+             * the screen, since the graph is given directly to the constructor.
+             */
+            var g = {
+                    nodes: [],
+                    edges: []
+                };
+
+            // Generate a random graph:
+            //точки
+            <?php
+            $count = 1;
+            $nodevaluemax = $tree->allnodes[0]->nodeval +1;
+            foreach ($tree->allnodes as $key => $node) {
+                $label = "";
+                $color = "#ccc";
+                if (!is_null($node->symbol)) {
+                    $label .=  $node->symbol;
+                    if(ord($node->symbol) < 14){
+                        $label = "spec[".ord($node->symbol)."]";
+                    }
+                    $color = "#f00";
+                }
+                $tree->allnodes[$key]->idjs = $count;
+                $y = $nodevaluemax - $node->nodeval;
+                echo "g.nodes.push({
+                id: 'n' + $count,
+                label: '' + '$label',
+                x: $count,
+                y: $y,
+                size: 10,
+                color: '$color'
+                });";
+                $count++;
+            }
+            $count = 1;
+            foreach ($tree->allnodes as $node) {
+                if (!is_null($node->nextnodeleft)) {
+                    $idleft = $node->nextnodeleft->idjs;
+                    echo " g.edges.push({
+                id: 'e' + $count,
+                label: '0',
+                source: 'n' + $node->idjs,
+                target: 'n' + $idleft,
+                size: 10,
+                color: '#ccc'
+                });";
+                    $count++;
+                }
+
+                if (!is_null($node->nextnoderight)) {
+                    $idright = $node->nextnoderight->idjs;
+                    echo " g.edges.push({
+                id: 'e' + $count,
+                label: '1',
+                source: 'n' + $node->idjs,
+                target: 'n' + $idright,
+                size: 10,
+                color: '#ccc',
+                });";
+                    $count++;
+                }
+            }
+            ?>
+
+            // Instantiate sigma:
+            s = new sigma({
+                graph: g,
+                renderer: {
+                    container: document.getElementById('graph-container'),
+                    type: "canvas"
+                },
+                settings: {
+                    edgeLabelSize: 'proportional',
+                    minArrowSize: 10
+                }
+            });
+            // load the graph
+            s.graph.read(graph);
+            // draw the graph
+            s.refresh();
+            // launch force-atlas for 5sec
+            s.startForceAtlas2();
+            window.setTimeout(function() {s.killForceAtlas2()}, 10000);
+        </script>
+    </div>
+
 </div>
 </body>
 </html>

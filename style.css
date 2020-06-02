@@ -35,7 +35,14 @@ input {
     background: #c0e3fe;
     box-shadow: 22px 22px 43px #90aabf,
     -22px -22px 43px #f0ffff;
+}
 
+.boxshadow2 {
+    margin-bottom: 15px;
+    border-radius: 38px;
+    background: #c0e3fe;
+    box-shadow: 22px 22px 43px #90aabf,
+    -22px -22px 43px #f0ffff;
 }
 
 .boxshadowbutton {
@@ -57,7 +64,7 @@ body {
     grid-template-columns: 0.4fr 0.8fr 2.8fr 0.8fr 0.4fr;
     grid-template-rows: 0.1fr 0.3fr 0.5fr 2fr 2fr 2.3fr 2.3fr;
     gap: 1px 1px;
-    grid-template-areas: ". . . . ." ". . gridtitle . ." ". gridinfo gridinfo gridinfo ." ". gridencode gridencode gridencode ." ". griddecode griddecode griddecode ." ". gridother gridother gridother ." ". gridother2 gridother2 gridother2 .";
+    grid-template-areas: ". . . . ." ". . gridtitle . ." ". gridinfo gridinfo gridinfo ." ". gridencode gridencode gridencode ." ". griddecode griddecode griddecode ." ". gridother gridother gridother ." ". gridother2 gridother2 gridother2 ." ". gridother3 gridother3 gridother3 .";
 }
 
 
@@ -121,4 +128,19 @@ body {
 .gridother2 {
     text-align: center;
     grid-area: gridother2;
+}
+
+.gridother3 {
+    text-align: left;
+    grid-area: gridother3;
+}
+.gridother3 >p{
+    text-align:center;
+}
+
+
+#graph-container {
+   width: 100%;
+    height: 600px;
+    margin: auto;
 }

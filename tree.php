@@ -4,11 +4,13 @@ class tree
 {
     var $nodes;
     var $table;
+    var $allnodes;
 
     function __construct()
     {
         $this->nodes = array();
         $this->table = array();
+        $this->allnodes = array();
     }
 
     function setnode($symbol, $value)
@@ -50,7 +52,7 @@ class tree
     function generateTable()
     {
         // необходим ассоциативный массив , функция возвращает индесы неправильно
-        $this->table =  $this->nodes[0]->getArray("");
+        $this->table =  $this->nodes[0]->getArray("",$this->allnodes);
     }
 
     // вставляем в очередь наш листок
