@@ -1,4 +1,14 @@
 {
+    "name": "igor-kor/kursovik2020",
+    "description": "Курсовая работа июнь 2020",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Igor Sharangiya",
+            "email": "Igor_korenovsk@mail.ru"
+        }
+    ],
     "require": {
         "phpunit/phpunit": "*"
     }
